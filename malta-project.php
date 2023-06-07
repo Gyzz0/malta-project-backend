@@ -12,7 +12,7 @@ foreach ($headers as $key => $value)
         $token = $value;
 
 if($token == '')
-    notAuthCall($db, $token);
+    notAuthCall($db);
 else
     authCall($db, $token);
 

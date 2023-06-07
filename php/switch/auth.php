@@ -5,27 +5,30 @@ function validateToken($db, $token) {
 }
 
 function authCall($db, $token) {
-    if(validateToken($db, $token))
+    if(validateToken($db, $token)){
+        $body = json_decode(file_get_contents("php://input"), true);
+
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
                 getAuthSwitch($db, $token);
                 break;
             case 'POST':
-                postAuthSwitch($db, $token);
+                postAuthSwitch($db, $token, $body);
                 break;
             case 'PUT':
-                putAuthSwitch($db, $token);
+                putAuthSwitch($db, $token, $body);
                 break;
             case 'PATCH':
-                patchAuthSwitch($db, $token);
+                patchAuthSwitch($db, $token, $body);
                 break;
             case 'DELETE':
-                deleteAuthSwitch($db, $token);
+                deleteAuthSwitch($db, $token, $body);
                 break;
             default:
                 echoMessage("REQUEST_METHOD [AUTH] non valido, method={$_SERVER['REQUEST_METHOD']}");
                 break;
         }
+    }
     else
         echoMessage("TOKEN NON VALIDO");        
 }
@@ -41,7 +44,7 @@ function getAuthSwitch($db, $token){
     }
 }
 
-function postAuthSwitch($db, $token){
+function postAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
@@ -52,7 +55,7 @@ function postAuthSwitch($db, $token){
     }
 }
 
-function putAuthSwitch($db, $token){
+function putAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
@@ -63,7 +66,7 @@ function putAuthSwitch($db, $token){
     }
 }
 
-function patchAuthSwitch($db, $token){
+function patchAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
@@ -74,7 +77,7 @@ function patchAuthSwitch($db, $token){
     }
 }
 
-function deleteAuthSwitch($db, $token){
+function deleteAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
