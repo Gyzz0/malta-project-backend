@@ -18,7 +18,7 @@ function notAuthCall($db, $token) {
             deleteNotAuthSwitch($db, $token);
             break;
         default:
-            #TODO aggiungere log "REQUEST_METHOD NOT_AUTH non valido"
+            echoMessage("REQUEST_METHOD [NOT_AUTH] non valido, method={$_SERVER['REQUEST_METHOD']}");
             break;
     }        
 }
@@ -29,7 +29,7 @@ function getNotAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL GET NOT_AUTH non valido"
+            echoMessage("GET CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -40,7 +40,7 @@ function postNotAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL POST NOT_AUTH non valido"
+            echoMessage("POST CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -51,7 +51,7 @@ function putNotAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL PUT NOT_AUTH non valido"
+            echoMessage("PUT CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -62,7 +62,7 @@ function patchNotAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL PATCH NOT_AUTH non valido"
+            echoMessage("PATCH CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -73,7 +73,7 @@ function deleteNotAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL DELETE NOT_AUTH non valido"
+            echoMessage("DELETE CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }

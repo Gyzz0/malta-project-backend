@@ -23,11 +23,11 @@ function authCall($db, $token) {
                 deleteAuthSwitch($db, $token);
                 break;
             default:
-                #TODO aggiungere log "REQUEST_METHOD AUTH non valido"
+                echoMessage("REQUEST_METHOD [AUTH] non valido, method={$_SERVER['REQUEST_METHOD']}");
                 break;
         }
-    #TODO aggiungere else "token non valido" 
-        
+    else
+        echoMessage("TOKEN NON VALIDO");        
 }
 
 function getAuthSwitch($db, $token){
@@ -36,7 +36,7 @@ function getAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL GET AUTH non valido"
+            echoMessage("GET CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -47,7 +47,7 @@ function postAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL POST AUTH non valido"
+            echoMessage("POST CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -58,7 +58,7 @@ function putAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL PUT AUTH non valido"
+            echoMessage("PUT CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -69,7 +69,7 @@ function patchAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL PATCH AUTH non valido"
+            echoMessage("PATCH CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
@@ -80,7 +80,7 @@ function deleteAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL DELETE AUTH non valido"
+            echoMessage("DELETE CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
