@@ -1,7 +1,11 @@
 <?php
 
 function validateToken($db, $token) {
+    $count = mysqli_fetch_assoc(
+        $db->query("SELECT COUNT(*) AS count FROM `sistema_token` WHERE `sistema_token`.`token`='$token'")
+    )["count"];
 
+    return intval($count) > 0;
 }
 
 function authCall($db, $token) {
@@ -30,7 +34,7 @@ function authCall($db, $token) {
         }
     }
     else
-        echoMessage("TOKEN NON VALIDO");        
+        echoMessage("TOKEN NON VALIDO");
 }
 
 function getAuthSwitch($db, $token){
