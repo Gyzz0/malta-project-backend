@@ -1,4 +1,5 @@
 <?php
+include './php/api/giocatore.php';
 
 function notAuthCall($db) {
     $body = json_decode(file_get_contents("php://input"), true);
@@ -38,8 +39,8 @@ function getNotAuthSwitch($db){
 
 function postNotAuthSwitch($db, $body){
     switch ($_GET['call']) {
-        case 'call':
-            # code...
+        case 'login':
+            login($db, $body);
             break;
         default:
             echoMessage("POST CALL [NOT_AUTH] non valido, call={$_GET['call']}");
