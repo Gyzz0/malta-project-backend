@@ -23,3 +23,7 @@ function echoMessage($message)
 function removeAcuteBrackets($testo){
     return str_replace(['<','>'], '', $testo);
 }
+
+function validateQuery($query){
+    return $query->num_rows ==  1;
+}

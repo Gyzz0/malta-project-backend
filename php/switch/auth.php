@@ -1,11 +1,9 @@
 <?php
 
 function validateToken($db, $token) {
-    $count = mysqli_fetch_assoc(
-        $db->query("SELECT COUNT(*) AS count FROM `sistema_token` WHERE `sistema_token`.`token`='$token'")
-    )["count"];
-
-    return intval($count) > 0;
+    return validateQuery(
+        $db->query("SELECT * FROM `sistema_token` WHERE `sistema_token`.`token`='$token'")
+    );
 }
 
 function authCall($db, $token) {
