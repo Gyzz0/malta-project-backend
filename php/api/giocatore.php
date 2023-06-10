@@ -5,7 +5,7 @@ function login($db, $body)
     $username = $body["username"];
     $password = $body["password"];
 
-    $result = $db->query("SELECT `giocatore`.`id` FROM `giocatore` WHERE `giocatore`.`username`='$username' AND `giocatore`.`password`='$password'");
+    $result = $db->query("SELECT `giocatore`.`id` FROM `giocatore` WHERE LOWER(`giocatore`.`username`)=LOWER('$username') AND `giocatore`.`password`='$password'");
     if (validateQuery($result)) {
         $token = md5("$password" . date('Y-m-d H:i:s') . " + '60oS*6a@wK%cYuwuB3Hr'");
         $idGiocatore = mysqli_fetch_assoc($result)["id"];
@@ -17,4 +17,15 @@ function login($db, $body)
     }
     else
         echoMessage(false);
+}
+
+
+function existUsername($db, $body){
+    $username = $body["username"];
+    echoMessage(validateQuery($db->query("SELECT * FROM `giocatore` WHERE LOWER(`giocatore`.`username`)=LOWER('$username')")));
+}
+
+function existEmail($db, $body){
+    $email = $body["email"];
+    echoMessage(validateQuery($db->query("SELECT * FROM `giocatore` WHERE LOWER(`giocatore`.`email`)=LOWER('$email')")));
 }

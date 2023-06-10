@@ -1,7 +1,8 @@
 <?php
 include './php/api/giocatore.php';
 
-function notAuthCall($db) {
+function notAuthCall($db)
+{
     $body = json_decode(file_get_contents("php://input"), true);
 
     switch ($_SERVER['REQUEST_METHOD']) {
@@ -23,10 +24,11 @@ function notAuthCall($db) {
         default:
             echoMessage("REQUEST_METHOD [NOT_AUTH] non valido, method={$_SERVER['REQUEST_METHOD']}");
             break;
-    }        
+    }
 }
 
-function getNotAuthSwitch($db){
+function getNotAuthSwitch($db)
+{
     switch ($_GET['call']) {
         case 'call':
             # code...
@@ -37,10 +39,17 @@ function getNotAuthSwitch($db){
     }
 }
 
-function postNotAuthSwitch($db, $body){
+function postNotAuthSwitch($db, $body)
+{
     switch ($_GET['call']) {
         case 'login':
             login($db, $body);
+            break;
+        case 'giocatore/existUsername':
+            existUsername($db, $body);
+            break;
+        case 'giocatore/existEmail':
+            existEmail($db, $body);
             break;
         default:
             echoMessage("POST CALL [NOT_AUTH] non valido, call={$_GET['call']}");
@@ -48,7 +57,8 @@ function postNotAuthSwitch($db, $body){
     }
 }
 
-function putNotAuthSwitch($db, $body){
+function putNotAuthSwitch($db, $body)
+{
     switch ($_GET['call']) {
         case 'call':
             # code...
@@ -59,7 +69,8 @@ function putNotAuthSwitch($db, $body){
     }
 }
 
-function patchNotAuthSwitch($db, $body){
+function patchNotAuthSwitch($db, $body)
+{
     switch ($_GET['call']) {
         case 'call':
             # code...
@@ -70,7 +81,8 @@ function patchNotAuthSwitch($db, $body){
     }
 }
 
-function deleteNotAuthSwitch($db, $body){
+function deleteNotAuthSwitch($db, $body)
+{
     switch ($_GET['call']) {
         case 'call':
             # code...
