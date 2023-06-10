@@ -45,6 +45,9 @@ function postNotAuthSwitch($db, $body)
         case 'login':
             login($db, $body);
             break;
+        case 'signup':
+            signup($db, $body);
+            break;
         case 'giocatore/existUsername':
             existUsername($db, $body);
             break;

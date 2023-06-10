@@ -19,6 +19,15 @@ function login($db, $body)
         echoMessage(false);
 }
 
+function signup($db, $body){
+    $username = $body["username"];
+    $email = $body["email"];
+    $password = $body["password"];
+
+    validateQuery($db->query("INSERT INTO `giocatore` (`username`, `email`, `password`) VALUES ('$username', '$email', '$password');"));
+    echoMessage(true);
+}
+
 
 function existUsername($db, $body){
     $username = $body["username"];
