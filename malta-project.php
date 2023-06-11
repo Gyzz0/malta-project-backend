@@ -4,6 +4,7 @@
 include 'php/utils/config.php';
 include 'php/switch/auth.php';
 include 'php/switch/not_auth.php';
+include 'php/utils/parser.php';
 
 $headers = getallheaders();
 foreach ($headers as $key => $value)
@@ -11,7 +12,7 @@ foreach ($headers as $key => $value)
         $token = $value;
 
 if($token == '')
-    notAuthCall($db, $token);
+    notAuthCall($db);
 else
     authCall($db, $token);
 

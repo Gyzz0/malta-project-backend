@@ -1,33 +1,38 @@
 <?php
 
 function validateToken($db, $token) {
-
+    return validateQuery(
+        $db->query("SELECT * FROM `sistema_token` WHERE `sistema_token`.`token`='$token'")
+    );
 }
 
 function authCall($db, $token) {
-    if(validateToken($db, $token))
+    if(validateToken($db, $token)){
+        $body = json_decode(file_get_contents("php://input"), true);
+
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
                 getAuthSwitch($db, $token);
                 break;
             case 'POST':
-                postAuthSwitch($db, $token);
+                postAuthSwitch($db, $token, $body);
                 break;
             case 'PUT':
-                putAuthSwitch($db, $token);
+                putAuthSwitch($db, $token, $body);
                 break;
             case 'PATCH':
-                patchAuthSwitch($db, $token);
+                patchAuthSwitch($db, $token, $body);
                 break;
             case 'DELETE':
-                deleteAuthSwitch($db, $token);
+                deleteAuthSwitch($db, $token, $body);
                 break;
             default:
-                #TODO aggiungere log "REQUEST_METHOD AUTH non valido"
+                echoMessage("REQUEST_METHOD [AUTH] non valido, method={$_SERVER['REQUEST_METHOD']}");
                 break;
         }
-    #TODO aggiungere else "token non valido" 
-        
+    }
+    else
+        echoMessage("TOKEN NON VALIDO");
 }
 
 function getAuthSwitch($db, $token){
@@ -36,51 +41,51 @@ function getAuthSwitch($db, $token){
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL GET AUTH non valido"
+            echoMessage("GET CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
 
-function postAuthSwitch($db, $token){
+function postAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL POST AUTH non valido"
+            echoMessage("POST CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
 
-function putAuthSwitch($db, $token){
+function putAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL PUT AUTH non valido"
+            echoMessage("PUT CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
 
-function patchAuthSwitch($db, $token){
+function patchAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL PATCH AUTH non valido"
+            echoMessage("PATCH CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
 
-function deleteAuthSwitch($db, $token){
+function deleteAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
         case 'call':
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL DELETE AUTH non valido"
+            echoMessage("DELETE CALL [AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }

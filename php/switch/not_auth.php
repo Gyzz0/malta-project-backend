@@ -1,79 +1,97 @@
 <?php
+include './php/api/giocatore.php';
 
-function notAuthCall($db, $token) {
+function notAuthCall($db)
+{
+    $body = json_decode(file_get_contents("php://input"), true);
+
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
-            getNotAuthSwitch($db, $token);
+            getNotAuthSwitch($db);
             break;
         case 'POST':
-            postNotAuthSwitch($db, $token);
+            postNotAuthSwitch($db, $body);
             break;
         case 'PUT':
-            putNotAuthSwitch($db, $token);
+            putNotAuthSwitch($db, $body);
             break;
         case 'PATCH':
-            patchNotAuthSwitch($db, $token);
+            patchNotAuthSwitch($db, $body);
             break;
         case 'DELETE':
-            deleteNotAuthSwitch($db, $token);
+            deleteNotAuthSwitch($db, $body);
             break;
         default:
-            #TODO aggiungere log "REQUEST_METHOD NOT_AUTH non valido"
-            break;
-    }        
-}
-
-function getNotAuthSwitch($db, $token){
-    switch ($_GET['call']) {
-        case 'call':
-            # code...
-            break;
-        default:
-            #TODO aggiungere log "CALL GET NOT_AUTH non valido"
+            echoMessage("REQUEST_METHOD [NOT_AUTH] non valido, method={$_SERVER['REQUEST_METHOD']}");
             break;
     }
 }
 
-function postNotAuthSwitch($db, $token){
+function getNotAuthSwitch($db)
+{
     switch ($_GET['call']) {
         case 'call':
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL POST NOT_AUTH non valido"
+            echoMessage("GET CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
 
-function putNotAuthSwitch($db, $token){
+function postNotAuthSwitch($db, $body)
+{
     switch ($_GET['call']) {
-        case 'call':
-            # code...
+        case 'login':
+            login($db, $body);
+            break;
+        case 'signup':
+            signup($db, $body);
+            break;
+        case 'giocatore/existUsername':
+            existUsername($db, $body);
+            break;
+        case 'giocatore/existEmail':
+            existEmail($db, $body);
             break;
         default:
-            #TODO aggiungere log "CALL PUT NOT_AUTH non valido"
+            echoMessage("POST CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
 
-function patchNotAuthSwitch($db, $token){
+function putNotAuthSwitch($db, $body)
+{
     switch ($_GET['call']) {
         case 'call':
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL PATCH NOT_AUTH non valido"
+            echoMessage("PUT CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
 
-function deleteNotAuthSwitch($db, $token){
+function patchNotAuthSwitch($db, $body)
+{
     switch ($_GET['call']) {
         case 'call':
             # code...
             break;
         default:
-            #TODO aggiungere log "CALL DELETE NOT_AUTH non valido"
+            echoMessage("PATCH CALL [NOT_AUTH] non valido, call={$_GET['call']}");
+            break;
+    }
+}
+
+function deleteNotAuthSwitch($db, $body)
+{
+    switch ($_GET['call']) {
+        case 'call':
+            # code...
+            break;
+        default:
+            echoMessage("DELETE CALL [NOT_AUTH] non valido, call={$_GET['call']}");
             break;
     }
 }
