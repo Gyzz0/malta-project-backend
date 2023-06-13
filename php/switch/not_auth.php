@@ -1,5 +1,6 @@
 <?php
 include './php/api/giocatore.php';
+include './php/api/trattato.php';
 
 function notAuthCall($db)
 {
@@ -53,6 +54,12 @@ function postNotAuthSwitch($db, $body)
             break;
         case 'giocatore/existEmail':
             existEmail($db, $body);
+            break;
+        case 'trattato/getChapters':
+            getCapitoliByTipo($db, $body);
+            break;
+        case 'trattato/getParagraphs':
+            getParagrafiByIdTrattato($db, $body);
             break;
         default:
             echoMessage("POST CALL [NOT_AUTH] non valido, call={$_GET['call']}");

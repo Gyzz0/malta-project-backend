@@ -1,4 +1,5 @@
 <?php
+include './php/api/sistema_token.php';
 
 function validateToken($db, $token) {
     return validateQuery(
@@ -48,8 +49,8 @@ function getAuthSwitch($db, $token){
 
 function postAuthSwitch($db, $token, $body){
     switch ($_GET['call']) {
-        case 'call':
-            # code...
+        case 'getIdGiocatoreByToken':
+            echoMessage(getIdGiocatoreByToken($db, $token));
             break;
         default:
             echoMessage("POST CALL [AUTH] non valido, call={$_GET['call']}");
