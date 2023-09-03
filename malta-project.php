@@ -1,5 +1,5 @@
 <?php
-#1.0.0-SNAPSHOT
+#2.0.0-SNAPSHOT
 
 include 'php/utils/config.php';
 include 'php/switch/auth.php';
